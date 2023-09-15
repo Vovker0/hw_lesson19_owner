@@ -16,10 +16,10 @@ public class RegFormTest {
     String userEmail = "bob.marley@gmail.com";
     String gender = "Male";
     String mobile = "2146703687";
-    String birth_year = "1999";
-    String birth_mnth = "May";
-    String birth_day = "29";
-    String dob_class = ".react-datepicker__day--0";
+    String birthYear = "1999";
+    String birthMnth = "May";
+    String birthDay = "29";
+    String dobClass = ".react-datepicker__day--0";
     String subject1 = "Accounting";
     String subject2 = "Math";
     String hobby1 = "Reading";
@@ -35,12 +35,13 @@ public class RegFormTest {
         // Configuration.holdBrowserOpen = true;
         Configuration.pageLoadStrategy = "eager";
         Configuration.browserSize = "1280x960";
+        Configuration.baseUrl = "https://demoqa.com";
     }
 
     @Test
     void regFormTest() {
 
-        open("https://demoqa.com/automation-practice-form");
+        open("/automation-practice-form");
         $(".main-header").shouldHave(text("Practice Form"));
 
         // убираем мешающие банеры
@@ -55,9 +56,9 @@ public class RegFormTest {
         $("#userNumber").setValue(mobile);
 
         $("#dateOfBirthInput").click();
-        $(".react-datepicker__year-select").selectOption(birth_year);
-        $(".react-datepicker__month-select").selectOption(birth_mnth);
-        $(dob_class + birth_day + ":not(.react-datepicker__day--outside-month)").click();
+        $(".react-datepicker__year-select").selectOption(birthYear);
+        $(".react-datepicker__month-select").selectOption(birthMnth);
+        $(dobClass + birthDay + ":not(.react-datepicker__day--outside-month)").click();
 
         $("#subjectsInput").setValue(subject1).pressEnter();
         $("#subjectsInput").setValue(subject2).pressEnter();
@@ -82,7 +83,7 @@ public class RegFormTest {
         $(".table-responsive").$(byText("Student Email")).sibling(0).shouldHave(text(userEmail));
         $(".table-responsive").$(byText("Gender")).sibling(0).shouldHave(text(gender));
         $(".table-responsive").$(byText("Mobile")).sibling(0).shouldHave(text(mobile));
-        $(".table-responsive").$(byText("Date of Birth")).sibling(0).shouldHave(text(birth_day + " " + birth_mnth + "," + birth_year));
+        $(".table-responsive").$(byText("Date of Birth")).sibling(0).shouldHave(text(birthDay + " " + birthMnth + "," + birthYear));
         $(".table-responsive").$(byText("Subjects")).sibling(0).shouldHave(text(subject1 + ", " + subject2));
         $(".table-responsive").$(byText("Hobbies")).sibling(0).shouldHave(text(hobby1 + ", " + hobby2));
         $(".table-responsive").$(byText("Picture")).sibling(0).shouldHave(text(picture1));
