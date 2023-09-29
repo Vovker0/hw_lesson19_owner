@@ -10,7 +10,7 @@ public class TestBase {
 
     @BeforeAll
     static void beforeAll() {
-        //Configuration.holdBrowserOpen = true;
+        Configuration.holdBrowserOpen = true;
         Configuration.pageLoadStrategy = "eager";
         Configuration.browserSize = "1280x960";
         Configuration.baseUrl = "https://demoqa.com";

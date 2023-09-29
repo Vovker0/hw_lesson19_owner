@@ -2,8 +2,7 @@ package com.demoqa.pages.components;
 
 import com.codeborne.selenide.SelenideElement;
 
-import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 
@@ -14,8 +13,13 @@ public class ModalDialog {
     SelenideElement modalDialogTable = $(".table-responsive");
     SelenideElement closeButton = $("#closeLargeModal");
 
-    public ModalDialog checkVisibility() {
+    public ModalDialog checkIfVisibile() {
         modalDialog.shouldBe(visible);
+        return this;
+    }
+
+    public ModalDialog checkIfHidden() {
+        modalDialog.shouldBe(hidden);
         return this;
     }
 

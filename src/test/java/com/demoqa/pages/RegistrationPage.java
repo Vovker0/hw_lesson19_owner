@@ -109,7 +109,7 @@ public class RegistrationPage {
     }
 
     public RegistrationPage checkResultTableOpened() {
-        resultTable.checkVisibility()
+        resultTable.checkIfVisibile()
                 .checkTitle("Thanks for submitting the form");
         return this;
     }
@@ -121,5 +121,9 @@ public class RegistrationPage {
 
     public void closeResultTable() {
         resultTable.close();
+    }
+
+    public void checkResultTableNotOpened() {
+        resultTable.checkIfHidden();
     }
 }
