@@ -13,7 +13,7 @@ public class ModalDialog {
     SelenideElement modalDialogTable = $(".table-responsive");
     SelenideElement closeButton = $("#closeLargeModal");
 
-    public ModalDialog checkIfVisibile() {
+    public ModalDialog checkIfVisible() {
         modalDialog.shouldBe(visible);
         return this;
     }
