@@ -53,8 +53,7 @@ public class RegFormTest extends TestBase {
                 .checkSubmittedValue("Hobbies", hobby1 + ", " + hobby2)
                 .checkSubmittedValue("Picture", picture1)
                 .checkSubmittedValue("Address", address1)
-                .checkSubmittedValue("State and City", state + " " + city)
-                .closeResultTable();
+                .checkSubmittedValue("State and City", state + " " + city);
     }
 
     @Test
