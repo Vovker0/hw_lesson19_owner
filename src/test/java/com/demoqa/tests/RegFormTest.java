@@ -1,59 +1,43 @@
 package com.demoqa.tests;
 
+import com.demoqa.pages.RegistrationPage;
 import org.junit.jupiter.api.Test;
 
 public class RegFormTest extends TestBase {
 
-    // переменные для теста
-    String firstName = "Bob";
-    String lastName = "Marley";
-    String userEmail = "bob.marley@gmail.com";
-    String gender = "Male";
-    String mobile = "2146703687";
-    String birthYear = "1999";
-    String birthMonth = "May";
-    String birthDay = "29";
-    String subject1 = "Accounting";
-    String subject2 = "Math";
-    String hobby1 = "Reading";
-    String hobby2 = "Music";
-    String picture1 = "pollutant.gif";
-    String address1 = "920 S Harwood St, Dallas, TX 75201, USA";
-    String state = "Uttar Pradesh";
-    String city = "Agra";
+    RegistrationPage registrationPage = new RegistrationPage();
+    TestData testData = new TestData();
 
     @Test
     void regFormFillAllSuccessTest() {
 
         registrationPage.openPage()
                 .removeBanners()
-                .setFirstName(firstName)
-                .setLastName(lastName)
-                .setEmail(userEmail)
-                .setGender(gender)
-                .setMobile(mobile)
-                .setDateOfBirth(birthDay, birthMonth, birthYear)
-                .setSubject(subject1)
-                .setSubject(subject2)
-                .setHobby(hobby1)
-                .setHobby(hobby2)
-                .uploadPicture(picture1)
-                .setAddress(address1)
-                .setState(state)
-                .setCity(city)
+                .setFirstName(testData.firstName)
+                .setLastName(testData.lastName)
+                .setEmail(testData.userEmail)
+                .setGender(testData.gender)
+                .setMobile(testData.mobile)
+                .setDateOfBirth(testData.birthDay, testData.birthMonth, testData.birthYear)
+                .setSubjects(testData.selectedSubjects)
+                .setHobbies(testData.selectedHobbies)
+                .uploadPicture(testData.picture1)
+                .setAddress(testData.address1)
+                .setState(testData.state)
+                .setCity(testData.city)
                 .submitForm();
 
         registrationPage.checkResultTableOpened()
-                .checkSubmittedValue("Student Name", firstName + " " + lastName)
-                .checkSubmittedValue("Student Email", userEmail)
-                .checkSubmittedValue("Gender", gender)
-                .checkSubmittedValue("Mobile", mobile)
-                .checkSubmittedValue("Date of Birth", birthDay + " " + birthMonth + "," + birthYear)
-                .checkSubmittedValue("Subjects", subject1 + ", " + subject2)
-                .checkSubmittedValue("Hobbies", hobby1 + ", " + hobby2)
-                .checkSubmittedValue("Picture", picture1)
-                .checkSubmittedValue("Address", address1)
-                .checkSubmittedValue("State and City", state + " " + city);
+                .checkSubmittedValue("Student Name", testData.firstName + " " + testData.lastName)
+                .checkSubmittedValue("Student Email", testData.userEmail)
+                .checkSubmittedValue("Gender", testData.gender)
+                .checkSubmittedValue("Mobile", testData.mobile)
+                .checkSubmittedValue("Date of Birth", testData.birthDay + " " + testData.birthMonth + "," + testData.birthYear)
+                .checkSubmittedValue("Subjects", String.join(", ", testData.selectedSubjects))
+                .checkSubmittedValue("Hobbies", String.join(", ", testData.selectedHobbies))
+                .checkSubmittedValue("Picture", testData.picture1)
+                .checkSubmittedValue("Address", testData.address1)
+                .checkSubmittedValue("State and City", testData.state + " " + testData.city);
     }
 
     @Test
@@ -61,17 +45,17 @@ public class RegFormTest extends TestBase {
 
         registrationPage.openPage()
                 .removeBanners()
-                .setFirstName(firstName)
-                .setLastName(lastName)
-                .setGender(gender)
-                .setMobile(mobile)
+                .setFirstName(testData.firstName)
+                .setLastName(testData.lastName)
+                .setGender(testData.gender)
+                .setMobile(testData.mobile)
                 .submitForm();
 
         registrationPage.checkResultTableOpened()
-                .checkSubmittedValue("Student Name", firstName + " " + lastName)
-                .checkSubmittedValue("Gender", gender)
-                .checkSubmittedValue("Mobile", mobile)
-                .closeResultTable();
+                .checkSubmittedValue("Student Name", testData.firstName + " " + testData.lastName)
+                .checkSubmittedValue("Gender", testData.gender)
+                .checkSubmittedValue("Mobile", testData.mobile);
+
     }
 
     @Test
@@ -89,15 +73,15 @@ public class RegFormTest extends TestBase {
 
         registrationPage.openPage()
                 .removeBanners()
-                .setFirstName(firstName)
-                .setLastName(lastName)
-                .setEmail(userEmail)
-                .setDateOfBirth(birthDay, birthMonth, birthYear)
-                .setSubject(subject1)
-                .setHobby(hobby2)
-                .setAddress(address1)
-                .setState(state)
-                .setCity(city)
+                .setFirstName(testData.firstName)
+                .setLastName(testData.lastName)
+                .setEmail(testData.userEmail)
+                .setDateOfBirth(testData.birthDay, testData.birthMonth, testData.birthYear)
+                .setSubjects(testData.selectedSubjects)
+                .setHobbies(testData.selectedHobbies)
+                .setAddress(testData.address1)
+                .setState(testData.state)
+                .setCity(testData.city)
                 .submitForm();
 
         registrationPage.checkResultTableNotOpened();

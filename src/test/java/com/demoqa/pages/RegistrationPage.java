@@ -4,6 +4,8 @@ import com.codeborne.selenide.SelenideElement;
 import com.demoqa.pages.components.CalendarComponent;
 import com.demoqa.pages.components.ModalDialog;
 
+import java.util.Set;
+
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
@@ -13,20 +15,20 @@ public class RegistrationPage {
     CalendarComponent calendar = new CalendarComponent();
     ModalDialog resultTable = new ModalDialog();
 
-    SelenideElement mainHeader = $(".main-header");
-    SelenideElement firstNameInput = $("#firstName");
-    SelenideElement lastNameInput = $("#lastName");
-    SelenideElement emailInput = $("#userEmail");
-    SelenideElement genderInput = $("#genterWrapper");
-    SelenideElement mobileInput = $("#userNumber");
-    SelenideElement birthDateInput = $("#dateOfBirthInput");
-    SelenideElement subjectInput = $("#subjectsInput");
-    SelenideElement hobbyInput = $("#hobbiesWrapper");
-    SelenideElement pictureInput = $("#uploadPicture");
-    SelenideElement addressInput = $("#currentAddress");
-    SelenideElement stateInput = $("#state");
-    SelenideElement cityInput = $("#city");
-    SelenideElement submitButton = $("#submit");
+    SelenideElement mainHeader = $(".main-header"),
+            firstNameInput = $("#firstName"),
+            lastNameInput = $("#lastName"),
+            emailInput = $("#userEmail"),
+            genderInput = $("#genterWrapper"),
+            mobileInput = $("#userNumber"),
+            birthDateInput = $("#dateOfBirthInput"),
+            subjectInput = $("#subjectsInput"),
+            hobbyInput = $("#hobbiesWrapper"),
+            pictureInput = $("#uploadPicture"),
+            addressInput = $("#currentAddress"),
+            stateInput = $("#state"),
+            cityInput = $("#city"),
+            submitButton = $("#submit");
 
 
     public RegistrationPage openPage() {
@@ -72,13 +74,17 @@ public class RegistrationPage {
         return this;
     }
 
-    public RegistrationPage setSubject(String value) {
-        subjectInput.setValue(value).pressEnter();
+    public RegistrationPage setSubjects(Set<String> setOfSubjects) {
+        for (String subj : setOfSubjects) {
+            subjectInput.setValue(subj).pressEnter();
+        }
         return this;
     }
 
-    public RegistrationPage setHobby(String value) {
-        hobbyInput.$(byText(value)).click();
+    public RegistrationPage setHobbies(Set<String> setOfHobbies) {
+        for (String hobby : setOfHobbies) {
+            hobbyInput.$(byText(hobby)).click();
+        }
         return this;
     }
 
@@ -117,10 +123,6 @@ public class RegistrationPage {
     public RegistrationPage checkSubmittedValue(String fieldLabel, String fieldValue) {
         resultTable.checkTableValue(fieldLabel, fieldValue);
         return this;
-    }
-
-    public void closeResultTable() {
-        resultTable.close();
     }
 
     public void checkResultTableNotOpened() {

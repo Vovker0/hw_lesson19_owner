@@ -11,7 +11,6 @@ public class ModalDialog {
     SelenideElement modalDialog = $(".modal-dialog");
     SelenideElement modalDialogTitle = $(".modal-title");
     SelenideElement modalDialogTable = $(".table-responsive");
-    SelenideElement closeButton = $("#closeLargeModal");
 
     public ModalDialog checkIfVisible() {
         modalDialog.shouldBe(visible);
@@ -30,9 +29,5 @@ public class ModalDialog {
     public void checkTableValue(String label, String value) {
         modalDialogTable.$(byText(label))
                 .sibling(0).shouldHave(text(value));
-    }
-
-    public void close() {
-        closeButton.click();
     }
 }
