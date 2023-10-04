@@ -43,7 +43,7 @@ public class TestData {
             city = getCity(state);
 
     private String dateFormat(String pattern, Date date) {
-        SimpleDateFormat simpleDate = new SimpleDateFormat(pattern);
+        SimpleDateFormat simpleDate = new SimpleDateFormat(pattern, Locale.ENGLISH);
         return simpleDate.format(date);
     }
 
