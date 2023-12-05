@@ -7,7 +7,7 @@ group = 'com.demoqa'
 version = '1.0'
 
 def allureVersion = "2.24.0",
-    selenideVersion = "7.0.3",
+    selenideVersion = "6.19.1",
     jUnitVersion = "5.10.1"
 
 allure {

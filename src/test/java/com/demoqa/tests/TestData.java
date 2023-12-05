@@ -61,13 +61,18 @@ public class TestData {
     }
 
     private String getCity(String ofState) {
-        return switch (ofState) {
-            case "NCR" -> faker.options().option(ncrCities);
-            case "Uttar Pradesh" -> faker.options().option(uttarCities);
-            case "Haryana" -> faker.options().option(haryanaCities);
-            case "Rajasthan" -> faker.options().option(rajasthanCities);
-            default -> "";
-        };
+        switch (ofState) {
+            case "NCR":
+                return faker.options().option(ncrCities);
+            case "Uttar Pradesh":
+                return faker.options().option(uttarCities);
+            case "Haryana":
+                return faker.options().option(haryanaCities);
+            case "Rajasthan":
+                return faker.options().option(rajasthanCities);
+            default:
+                return "";
+        }
     }
 }
 
