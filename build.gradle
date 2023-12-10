@@ -36,7 +36,7 @@ compileTestJava {
 }
 
 dependencies {
-    testImplementation (
+    testImplementation(
             "com.codeborne:selenide:$selenideVersion",
             "org.junit.jupiter:junit-jupiter:$jUnitVersion",
             "io.qameta.allure:allure-selenide:$allureVersion",
@@ -46,7 +46,7 @@ dependencies {
 
 tasks.withType(Test) {
     useJUnitPlatform()
-
+    systemProperties(System.getProperties())
     testLogging {
         lifecycle {
             events "started", "skipped", "failed", "standard_error", "standard_out"
@@ -56,13 +56,19 @@ tasks.withType(Test) {
 }
 
 task positive_tests(type: Test) {
-    useJUnitPlatform{
+    useJUnitPlatform {
         includeTags("Positive")
     }
 }
 
 task negative_tests(type: Test) {
-    useJUnitPlatform{
+    useJUnitPlatform {
         includeTags("Negative")
+    }
+}
+
+task shortest_test(type: Test) {
+    useJUnitPlatform {
+        includeTags("shortest")
     }
 }

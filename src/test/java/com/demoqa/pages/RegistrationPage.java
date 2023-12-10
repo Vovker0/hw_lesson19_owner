@@ -7,6 +7,7 @@ import com.demoqa.pages.components.ModalDialog;
 import java.util.Set;
 
 import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 
@@ -23,6 +24,7 @@ public class RegistrationPage {
             mobileInput = $("#userNumber"),
             birthDateInput = $("#dateOfBirthInput"),
             subjectInput = $("#subjectsInput"),
+            subjectAutocomplete = $(".subjects-auto-complete__option--is-focused"),
             hobbyInput = $("#hobbiesWrapper"),
             pictureInput = $("#uploadPicture"),
             addressInput = $("#currentAddress"),
@@ -76,7 +78,8 @@ public class RegistrationPage {
 
     public RegistrationPage setSubjects(Set<String> setOfSubjects) {
         for (String subj : setOfSubjects) {
-            subjectInput.setValue(subj).pressEnter();
+            subjectInput.setValue(subj);
+            subjectAutocomplete.shouldBe(visible).click(); // added for Firefox tests stability
         }
         return this;
     }
