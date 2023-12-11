@@ -17,8 +17,9 @@ public class TestBase {
     @BeforeAll
     static void beforeAll() {
         Configuration.pageLoadStrategy = "eager";
-        Configuration.browser = System.getProperty("browser", "chrome");
-        Configuration.browserVersion = System.getProperty("browserVersion");
+        String[] subString = System.getProperty("browserAndVersion", "Chrome: 100.0").split(": ");
+        Configuration.browser = subString[0];
+        Configuration.browserVersion = subString[1];
         Configuration.browserSize = System.getProperty("browserSize", "1280x960");
         Configuration.baseUrl = "https://" + System.getProperty("baseUrl", "demoqa.com");
         Configuration.remote = "https://" + System.getProperty("selenoidUser", "user1:1234")
