@@ -17,13 +17,15 @@ public class TestBase {
     @BeforeAll
     static void beforeAll() {
         Configuration.pageLoadStrategy = "eager";
-        String[] subString = System.getProperty("browserAndVersion", "Chrome: 100.0").split(": ");
+        // Browser Opera не использовать, т.к. хотя в Selenoid он есть, библиотека Selenide его не поддерживает
+        String[] subString = System.getProperty("browserAndVersion", "Firefox: 119.0").split(": ");
         Configuration.browser = subString[0];
         Configuration.browserVersion = subString[1];
         Configuration.browserSize = System.getProperty("browserSize", "1280x960");
         Configuration.baseUrl = "https://" + System.getProperty("baseUrl", "demoqa.com");
-        Configuration.remote = "https://" + System.getProperty("selenoidUser", "user1:1234")
-                + "@" + System.getProperty("selenoidUrl", "selenoid.autotests.cloud") + "/wd/hub";
+        Configuration.remote = "http://localhost:8080/wd/hub/";
+//        Configuration.remote = "https://" + System.getProperty("selenoidUser", "user1:1234")
+//                + "@" + System.getProperty("selenoidUrl", "selenoid.autotests.cloud") + "/wd/hub";
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability("selenoid:options", Map.<String, Object>of(
                 "enableVNC", true,
