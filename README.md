@@ -10,9 +10,9 @@ gradle clean test -Denvironment=local_browser
 gradle clean test -Denvironment=remote_browser
 ```
 
-Для запуска тестов на локально установленном Selenoid (если у вас таковой имеется) используйте команду:
+Для запуска тестов на локально установленном Selenoid (если у вас такой имеется, по умолчанию на http://localhost:8080/wd/hub/) используйте команду:
 ```shell
-gradle clean test -Denvironment=local_local_selenoid
+gradle clean test -Denvironment=local_selenoid
 ```
 
 ## Другие доступные ключи:
