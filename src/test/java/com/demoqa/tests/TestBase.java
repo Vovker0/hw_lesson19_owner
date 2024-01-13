@@ -3,8 +3,10 @@ package com.demoqa.tests;
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.logevents.SelenideLogger;
+import com.demoqa.config.BrowserConfig;
 import com.demoqa.pages.helpers.Attach;
 import io.qameta.allure.selenide.AllureSelenide;
+import org.aeonbits.owner.ConfigFactory;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -14,24 +16,24 @@ import java.util.Map;
 
 public class TestBase {
 
+    final static BrowserConfig config = ConfigFactory.create(BrowserConfig.class, System.getProperties());
+
     @BeforeAll
     static void beforeAll() {
         Configuration.pageLoadStrategy = "eager";
-        // Browser Opera не использовать, т.к. хотя в Selenoid он есть, библиотека Selenide его не поддерживает
-        String[] subString = System.getProperty("browserAndVersion", "Firefox: 119.0").split(": ");
-        Configuration.browser = subString[0];
-        Configuration.browserVersion = subString[1];
-        Configuration.browserSize = System.getProperty("browserSize", "1280x960");
-        Configuration.baseUrl = "https://" + System.getProperty("baseUrl", "demoqa.com");
-        Configuration.remote = "http://localhost:8080/wd/hub/";
-//        Configuration.remote = "https://" + System.getProperty("selenoidUser", "user1:1234")
-//                + "@" + System.getProperty("selenoidUrl", "selenoid.autotests.cloud") + "/wd/hub";
-        DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setCapability("selenoid:options", Map.<String, Object>of(
-                "enableVNC", true,
-                "enableVideo", true
-        ));
-        Configuration.browserCapabilities = capabilities;
+        Configuration.browser = config.browser();
+        Configuration.browserVersion = config.browserVersion();
+        Configuration.browserSize = config.resolution();
+        Configuration.baseUrl = config.baseUrl();
+        if (config.isRemote()) {
+            Configuration.remote = config.remoteURL();
+            DesiredCapabilities capabilities = new DesiredCapabilities();
+            capabilities.setCapability("selenoid:options", Map.<String, Object>of(
+                    "enableVNC", true,
+                    "enableVideo", true
+            ));
+            Configuration.browserCapabilities = capabilities;
+        }
     }
 
     @BeforeEach
@@ -46,7 +48,9 @@ public class TestBase {
         if (!(Configuration.browser.equalsIgnoreCase("firefox"))) {
             Attach.browserConsoleLogs(); // excluding for Firefox due to issue with logs from Firefox
         }
-        Attach.addVideo();
+        if (config.isRemote()) {
+            Attach.addVideo(config.videoRemoteURL());
+        }
         Selenide.closeWebDriver();
     }
 }

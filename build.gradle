@@ -7,7 +7,7 @@ group = 'com.demoqa'
 version = '1.0'
 
 def allureVersion = "2.24.0",
-    selenideVersion = "6.19.1",
+    selenideVersion = "7.0.4",
     jUnitVersion = "5.10.1"
 
 allure {
@@ -40,7 +40,8 @@ dependencies {
             "com.codeborne:selenide:$selenideVersion",
             "org.junit.jupiter:junit-jupiter:$jUnitVersion",
             "io.qameta.allure:allure-selenide:$allureVersion",
-            'com.github.javafaker:javafaker:1.0.2'
+            'com.github.javafaker:javafaker:1.0.2',
+            'org.aeonbits.owner:owner:1.0.12'
     )
 }
 
